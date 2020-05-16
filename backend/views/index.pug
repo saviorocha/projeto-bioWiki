@@ -2,4 +2,15 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p  Bem vindo à #[em BioWiki], uma wiki para classificação de seres vivos em estilo RPG
+
+  if error
+    p Erro ao carregar o conteúdo
+  else 
+    p Por enquanto temos a seguinte quantidade de registros:
+    
+    ul
+      li #[string Espécies:] !{data.especie_count}
+      li #[string Genêros:] !{data.genero_count}
+      li #[string Habilidades:] !{data.habilidade_count}
+

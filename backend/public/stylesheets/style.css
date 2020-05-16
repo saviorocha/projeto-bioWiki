@@ -1,8 +1,26 @@
-body {
+/* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+} */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #6b6d75;
 }
 
 a {
   color: #00B7FF;
+}
+
+.nav-item, span.border-right {
+  padding-left: 1rem;
+}
+
+
+#home_page {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
 }

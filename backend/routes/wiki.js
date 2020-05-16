@@ -87,4 +87,4 @@ router.get('/especie/:id/', especieController.especie_detail);
 //get para listar todos os especies
 router.get('/especies', especieController.especie_list);
 
-moudule.exports = router;
+module.exports = router;
