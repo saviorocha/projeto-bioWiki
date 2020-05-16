@@ -53,20 +53,20 @@ function createEspecie(nome, genero, descricao, status, cb) {
     });
 }
 
-// function habilidadeCreate(nome, descricao, tipo, cb) {
-//     habDetail = { nome: nome, descricao: descricao, tipo: tipo }
-//     let hab = new Habilidade(habDetail);
+function habilidadeCreate(nome, descricao, tipo, cb) {
+    habDetail = { nome: nome, descricao: descricao, tipo: tipo }
+    let hab = new Habilidade(habDetail);
 
-//     hab.save(function (err) {
-//         if (err) {
-//             cb(err, null);
-//             return;
-//         }
-//         console.log('Nova habilidade: ' + hab);
-//         habilidades.push(hab)
-//         cb(null, hab)
-//     });
-// }
+    hab.save(function (err) {
+        if (err) {
+            cb(err, null);
+            return;
+        }
+        console.log('Nova habilidade: ' + hab);
+        habilidades.push(hab)
+        cb(null, hab)
+    });
+}
 
 function generoCreate(cb) {
     // executa cada funcao uma depois da outra (em serie)
@@ -104,25 +104,41 @@ function especieCreate(cb) {
     // executa cada funcao uma depois da outra (em serie)
     async.series([
         function (callback) {
-            createEspecie('sapiens', generos[0], false, 'Humano (taxonomicamente Homo sapiens[2][3]), termo que deriva do latim "homem sábio",[4] ser humano, ser pessoa, gente ou homem, é a única espécie animal de primata bípede do género Homo ainda viva.', [10, 5, 1, 7, 4], callback);
+            createEspecie('sapiens', retrieve('Homo'), 'Humano (taxonomicamente Homo sapiens[2][3]), termo que deriva do latim "homem sábio",[4] ser humano, ser pessoa, gente ou homem, é a única espécie animal de primata bípede do género Homo ainda viva.', [10, 5, 1, 7, 4], callback);
         },
         function (callback) {
-            createEspecie('passerinum', generos[1], false, 'O mocho-pigmeu (Glaucidium passerinum) é uma espécie de ave da família Strigidae.', [6, 4, 2, 8, 5], callback);
+            createEspecie('passerinum', retrieve('Glaucidium'), 'O mocho-pigmeu (Glaucidium passerinum) é uma espécie de ave da família Strigidae.', [6, 4, 2, 8, 5], callback);
         },
         function (callback) {
-            createEspecie('catus', generos[2], false, 'O gato (Felis silvestris catus), também conhecido como gato caseiro, gato urbano ou gato doméstico,[4] é um mamífero carnívoro da família dos felídeos, muito popular como animal de estimação. ', [2, 1, 3, 1, 2], callback);
+            createEspecie('catus', retrieve('Felis'), 'O gato (Felis silvestris catus), também conhecido como gato caseiro, gato urbano ou gato doméstico,[4] é um mamífero carnívoro da família dos felídeos, muito popular como animal de estimação. ', [2, 1, 3, 1, 2], callback);
         }
     ],
         cb);
 }
 
-async.series([
-    generoCreate,
-    especieCreate
-],
-    function (err, results) {
-        if (err) { console.log('FINAL ERR: ' + err); }
-        else { console.log('yay'); }
-        mongoose.connect.close();
-    }
-);
+async function retrieve(genero) {
+    const doc = await Genero.findOne({nome: genero});
+    return Array.of(doc);
+}
+
+
+// let q = Genero
+//     .find({}, 'nome descricao')
+//     .exec(function (err, query_generos) {
+//         if (err) { console.log('GENERO ERR: ' + err); }
+//         console.log(query_generos);
+//     });
+
+// async.series([
+//     generoCreate,
+//     especieCreate
+// ],
+//     function (err, results) {
+//         if (err) { console.log('FINAL ERR: ' + err); }
+//         else { console.log('yay'); }
+//         mongoose.connect.close();
+//     }
+// );
+especieCreate(function (err, results) {
+    if (err) { console.log('FINAL ERR: ' + err); }
+});
