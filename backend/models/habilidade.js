@@ -11,7 +11,7 @@ let HabilidadeSchema = new Schema({
 HabilidadeSchema
     .virtual('url')
     .get(function() {
-        return '/inicio/' + this.nome;
+        return '/wiki/' + this.nome;
     });
 
 module.exports = mongoose.model('Habilidade', HabilidadeSchema);

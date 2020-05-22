@@ -19,7 +19,7 @@ EspecieSchema
 EspecieSchema
     .virtual('url')
     .get(function () {
-        return '/inicio/especie/' + this.nome_cientifico.trim();
+        return '/wiki/especie/' + this.nome_cientifico.replace(' ', '_');
     });
 
 module.exports = mongoose.model('Especie', EspecieSchema);

@@ -11,7 +11,7 @@ let GeneroSchema = new Schema({
 GeneroSchema
     .virtual('url')
     .get(function () {
-        return '/inicio/genero/' + this.nome;
+        return '/wiki/genero/' + this.nome;
     });
 
 module.exports = mongoose.model('Genero', GeneroSchema);
