@@ -12,7 +12,7 @@ let app = express();
 
 //Set up mongoose connection
 let mongoose = require('mongoose');
-let mongoDB = 'mongodb+srv://dbUser:XWANKvNIUw@cluster0-gdzwl.gcp.mongodb.net/bio-wiki?retryWrites=true&w=majority';
+let mongoDB = 'mongodb+srv://[usuario]:[senha]@cluster0-gdzwl.gcp.mongodb.net/bio-wiki?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
