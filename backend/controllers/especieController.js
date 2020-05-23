@@ -1,7 +1,7 @@
 let Especie = require('../models/especie');
 
 exports.especie_list = function (req, res, next) {
-    Especie.find({}, 'nome genero habilidades')
+    Especie.find({}, 'nome genero')
         .populate('genero')
         .exec(function (err, list_especies) {
             if (err) { return next(err); }
