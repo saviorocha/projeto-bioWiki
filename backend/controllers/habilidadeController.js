@@ -9,7 +9,7 @@ exports.habilidade_list = function (req, res) {
 }
 
 exports.habilidade_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: habilidade_detail: ' + req.params.id);
+    res.send('NOT IMPLEMENTED: habilidade_detail: ');
 }
 
 exports.habilidade_create_get = function (req, res) {

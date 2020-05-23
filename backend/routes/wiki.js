@@ -82,7 +82,7 @@ router.get('/especie/:id/update', especieController.especie_update_get);
 router.post('/especie/:id/update', especieController.especie_update_post);
 
 //get para retornar um especie
-router.get('/especie/:nome/', especieController.especie_detail);
+router.get('/especie/:id/', especieController.especie_detail);
 
 //get para listar todos os especies
 router.get('/especies', especieController.especie_list);
