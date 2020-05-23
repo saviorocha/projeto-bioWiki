@@ -4,7 +4,6 @@ block content
     ul
         each especie in especies_list
             li
-                a(href=especie.genero.url) #[strong #[em  #{especie.genero.nome}]]
-                a(href=especie.url) #[strong #[em  #{especie.nome}]]
+                a(href=especie.url) #[strong #[em  #{especie.genero.nome} #{especie.nome}]]
         else
             li Não existem espécies ainda

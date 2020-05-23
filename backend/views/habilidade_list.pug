@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    ul
+        each habilidade in habilidade_list
+            a(href=habilidade.url) #{habilidade.nome}
+        else
+            p Ainda não existem habilidades
