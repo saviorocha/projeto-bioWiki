@@ -1,4 +1,6 @@
 let Genero = require('../models/genero');
+let Especie = require('../models/especie');
+let async = require('async');
 
 exports.genero_list = function (req, res, next) {
     Genero.find({}, 'nome')
@@ -8,8 +10,27 @@ exports.genero_list = function (req, res, next) {
         });
 }
 
+//tá dando erro nessa caralha
 exports.genero_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: genero_detail');
+    
+    async.parallel({
+        genero: function (callback) {
+            Genero.findById(req.params.id)
+                .exec(callback);
+        },
+        genero_especie: function (callback) {
+            Especie.find({ 'genero': req.params.id })
+                .exec(callback);
+        }
+    }, function (err, results) {
+        if (err) { return next(err); }
+        if (results == null) {
+            let err = new Error('Gênero não encontrado');
+            err.status = 404;
+            return next(err); // propaga o erro até o error handler do app.js
+        }
+        res.render('genero_detail', { title: 'Detalhe do Gênero', genero: results.genero, genero_especie: results.genero_especie });// ambos requests tiveram sucesso, renderiza a pagina
+    });
 }
 
 exports.genero_create_get = function (req, res) {

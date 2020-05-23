@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 #{genero_list.nome}
+
+    div(style='margin-left:20px;margin-top:20px')
+        dl
+            dd #{genero_list.descricao}
+            each especie in genero_especie
+                a(href=especie.url) #{especie.nome}
+            else 
+                p Nenhuma especie
+
